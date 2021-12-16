@@ -1,7 +1,7 @@
 void gematrias(char *word, char *text)
 {
     int geo = checkwordgeo(word);
-    while(*word!='\0')
+    while(*text!='\0')
     {
         if((*word =! '\n') && (*word != '\t') &&(*word != ' '))
         {
@@ -33,7 +33,7 @@ int checkFromGeo(char* word, int needSum)
     int sum=0;
     char* start= word;
     int count = 0;
-    while(sum<needSum)
+    while((sum<needSum)&&(*word!='\0') )
     {
         if(65<=*word<=90)
         {
