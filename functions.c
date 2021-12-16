@@ -1,3 +1,6 @@
+#define TXT 1024
+#define WORD 30
+
 void gematrias(char *word, char *text)
 {
     int geo = checkwordgeo(word);
@@ -56,4 +59,8 @@ int checkFromGeo(char* word, int needSum)
             start++;
         }
     }
+}
+
+void atbash(char* word, char* text){
+    char atbashWord [WORD];
 }
