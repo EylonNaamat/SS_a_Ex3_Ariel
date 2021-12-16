@@ -1,6 +1,14 @@
 void gematrias(char *word, char *text)
 {
     int geo = checkwordgeo(word);
+    while(*word!='\0')
+    {
+        if((*word =! '\n') && (*word != '\t') &&(*word != ' '))
+        {
+            checkWordGeo(word);
+        }
+        word++;
+    }
 }
 
 int checkWordGeo(char* word)
