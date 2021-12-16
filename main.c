@@ -1,4 +1,5 @@
 #include <string.h>
+#include <stdio.h>
 #include "functions.h"
 
 #define TXT 1024

@@ -1,29 +1,18 @@
+#include "functions.h"
+#include <stdio.h>
 #define TXT 1024
 #define WORD 30
-
-void gematrias(char *word, char *text)
-{
-    int geo = checkwordgeo(word);
-    while(*text!='\0')
-    {
-        if((*text != '\n') && (*text != '\t') &&(*text != ' '))
-        {
-            checkFromGeo(text,geo);
-        }
-        text++;
-    }
-}
 
 int checkWordGeo(char *word)
 {
     int sum=0;
     while(*word != '\0')
     {
-        if(65<=*word<=90)
+        if((65<=*word )&&(*word=90))
         {
             sum = sum + *word -64;
         }
-        if(97<=*word<=122)
+        if((97<= *word)&&(*word<=122))
         {
             sum = sum + *word -96;  
         }
@@ -32,18 +21,18 @@ int checkWordGeo(char *word)
     return sum;
 }
 
-void checkFromGeo(char *text, int needSum)
+void checkFromGeo(char *text, int needSum,int* flag)
 {
     int sum=0;
     char* start= text;
     int count = 0;
     while((sum<needSum)&&(*text!='\0') )
     {
-        if(65<=*text<=90)
+        if((65<=*text)&&(*text<=90))
         {
             sum = sum + *text -64;
         }
-        if(97<=*text<=122)
+        if((97<=*text)&&(*text<=122))
         {
             sum = sum + *text -96;
         }
@@ -52,28 +41,34 @@ void checkFromGeo(char *text, int needSum)
     }
     if(sum == needSum)
     {
+        if(flag!=0)
+        {
+           printf("~"); 
+        }
+        else
+        {
+            *flag = 1;
+        }
         while(count>0)
         {
-            print("%c",*start);
+            printf("%c",*start);
             count--;
             start++;
         }
     }
 }
 
-void anagram(char *word,char *text)
+void gematrias(char *word, char *text)
 {
-    int chars[256]={0};
-    int length = fullArrAndlength(word,chars);
-    int copychars[256];
+    int geo = checkWordGeo(word);
+    int flag = 0;
     while(*text!='\0')
     {
         if((*text != '\n') && (*text != '\t') &&(*text != ' '))
         {
-            myCopyArr(chars,copychars);
-            checkFromAnag(text,copychars,length);
-
+            checkFromGeo(text,geo,&flag);
         }
+        text++;
     }
 }
 
@@ -82,9 +77,10 @@ int fullArrAndlength(char *word,int chars[])
     int sum = 0;
     while(*word != '\0')
     {
-        chars[*word]++;
+        chars[(int)*word]++;
         sum++;
     }
+    return sum;
 }
 void myCopyArr(int src[],int dest[])
 {
@@ -93,7 +89,7 @@ void myCopyArr(int src[],int dest[])
         dest[i]=src[i];
     }
 }
-void checkFromAnag(char *text, int coChars[], int length)
+void checkFromAnag(char *text, int coChars[], int length,int *flag)
 {
     char *start = text;
     int count =0;
@@ -101,7 +97,7 @@ void checkFromAnag(char *text, int coChars[], int length)
     {
         if((*text != '\n') && (*text != '\t') &&(*text != ' '))
         {
-            coChars[*text]--;
+            coChars[(int)*text]--;
             length--;
         }
         text++;
@@ -119,12 +115,36 @@ void checkFromAnag(char *text, int coChars[], int length)
         }
         coChars[i]=0;
     }
+    if(flag!=0)
+        {
+           printf("~"); 
+        }
+        else
+        {
+            *flag = 1;
+        }
     while(count!=0)
     {
-        print("%c", *start);
+        printf("%c", *start);
         start++;
         count--;
     }
     
 }
 
+void anagram(char *word,char *text)
+{
+    int flag = 0;
+    int chars[256]={0};
+    int length = fullArrAndlength(word,chars);
+    int copychars[256];
+    while(*text!='\0')
+    {
+        if((*text != '\n') && (*text != '\t') &&(*text != ' '))
+        {
+            myCopyArr(chars,copychars);
+            checkFromAnag(text,copychars,length,&flag);
+
+        }
+    }
+}
