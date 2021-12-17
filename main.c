@@ -30,8 +30,9 @@ int main()
     printf("%s", "Gematria Sequences: ");
     gematrias(word, txt);
     printf("%s", "\n");
-     printf("%s", "Atbash Sequences: ");
+    printf("%s", "Atbash Sequences: ");
     atbash(word, txt);
     printf("%s", "\n");
     printf("%s", "Anagram Sequences: ");
     anagram(word, txt);
+}

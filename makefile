@@ -4,7 +4,7 @@ functions.o : functions.c functions.h
 libfunction.a : functions.o functions.h
 	ar rcu libfunction.a functions.o
 
-main.o : main.c functions.h
+main.o : main.c  functions.h
 	gcc -c -Wall main.c
 
 stringProg : main.o libfunction.a
