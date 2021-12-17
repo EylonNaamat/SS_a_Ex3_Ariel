@@ -10,16 +10,16 @@ int checkWordGeo(char *word)
     int sum=0;
     while(*word != '\0')
     {
-        if((65<=*word )&&(*word=90))
+        if((65<=*word )&&(*word<=90))
         {
-            sum = sum + *word -64;
+            sum = sum+*word-64;
         }
         if((97<= *word)&&(*word<=122))
         {
-            sum = sum + *word -96;  
+            sum = sum+*word-96;  
         }
         word++;
-    } 
+    }
     return sum;
 }
 
@@ -32,7 +32,7 @@ void checkFromGeo(char *text, int needSum,int* flag)
     {
         if((65<=*text)&&(*text<=90))
         {
-            sum = sum + *text -64;
+            sum = sum + *text-64;
         }
         if((97<=*text)&&(*text<=122))
         {
@@ -43,7 +43,7 @@ void checkFromGeo(char *text, int needSum,int* flag)
     }
     if(sum == needSum)
     {
-        if(flag!=0)
+        if(*flag!=0)
         {
            printf("~"); 
         }
@@ -66,7 +66,7 @@ void gematrias(char *word, char *text)
     int flag = 0;
     while(*text!='\0')
     {
-        if((*text != '\n') && (*text != '\t') &&(*text != ' '))
+        if(((65<=*text)&&(*text<=90))||((97<=*text)&&(*text<=122)))
         {
             checkFromGeo(text,geo,&flag);
         }
@@ -81,6 +81,7 @@ int fullArrAndlength(char *word,int chars[])
     {
         chars[(int)*word]++;
         sum++;
+        word++;
     }
     return sum;
 }
@@ -117,7 +118,7 @@ void checkFromAnag(char *text, int coChars[], int length,int *flag)
         }
         coChars[i]=0;
     }
-    if(flag!=0)
+    if(*flag!=0)
         {
            printf("~"); 
         }
@@ -125,7 +126,7 @@ void checkFromAnag(char *text, int coChars[], int length,int *flag)
         {
             *flag = 1;
         }
-    while(count!=0)
+    while(count>0)
     {
         printf("%c", *start);
         start++;
@@ -142,12 +143,12 @@ void anagram(char *word,char *text)
     int copychars[256];
     while(*text!='\0')
     {
-        if((*text != '\n') && (*text != '\t') &&(*text != ' '))
+        if(((65<=*text)&&(*text<=90)) || ((97<=*text)&&(*text<=122)))
         {
             myCopyArr(chars,copychars);
             checkFromAnag(text,copychars,length,&flag);
-
         }
+        text++;
     }
 }
 

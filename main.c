@@ -35,5 +35,6 @@ int main()
     printf("%s", "\n");
     printf("%s", "Atbash Sequences: ");
     atbash(word, txt);
+    printf("%s", "\n");
 
 }
