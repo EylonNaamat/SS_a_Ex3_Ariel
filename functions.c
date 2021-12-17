@@ -198,13 +198,17 @@ void atbashWord(char* word, char* atbash){
 
 void reverseAtbash(char* atb, char* reverseAt){
     int i = 0;
-    while(* atb != 0){
-        i++;
+    while(*atb != 0){
         atb++;
+        i++;
     }
-    for(int j = i-1; j > 0; --j){
-        *reverseAt = atb[j];
-        reverseAt--;
+    atb--;
+    while(i > 0)
+    {
+        *reverseAt = *atb;
+        reverseAt++;
+        atb--; 
+        i--;
     }
 }
 
@@ -221,7 +225,7 @@ void checkNprint(char* text, char* word, int size, int* flag){
     int counter = 0;
     char* start = text;
     char* pointer = text;
-    while(*pointer != 0){
+    while(*pointer != 0 && *word != 0){
         if(*pointer == *word){
             word++;
         }else{
@@ -235,7 +239,6 @@ void checkNprint(char* text, char* word, int size, int* flag){
     if(counter != size){
         return;
     }
-
     if(*flag != 0){
         printf("%c", '~');
     }
@@ -243,6 +246,7 @@ void checkNprint(char* text, char* word, int size, int* flag){
     {
         *flag = 1;
     }
+
     while(counter != 0){
         printf("%c", *start);
         start++;
